@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Nombre de la ventana (parte del navegador) -->
     <title>Registro UniEvents+</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="../public/styles/styles.css">
     <!-- Iconos de las casillas -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Botón de registrar y su condiciones -->
             <button type="submit" id="btnRegistro" class="btn">Registrar</button>
             <div class="inicioSesion-link">
-                <p>¿Ya tienes cuenta? <a href="IniciarSesion.php">Inicia sesión aquí</a></p>
+                <p>¿Ya tienes cuenta? <a href="../Login/IniciarSesion.php">Inicia sesión aquí</a></p>
             </div>
         </form>
     </div>
