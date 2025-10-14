@@ -82,8 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
             <!-- Dirigir a RegistrarUsuario.php o RestablecerContraseña.php por medio de los links -->
             <div class="registro-link">
-                <p>¿Aún no tienes cuenta? <a href="../registroUsers/RegistrarUsuario.php">Regístrate aquí</a></p>
-                <p>¿Olvidaste tu contraseña? <a href="../Login/RestablecerContraseña.php">Restablecer</a></p>
+                <p>¿Aún no tienes cuenta? <a href="/Src/Login/RegistrarUsuario.php">Regístrate aquí</a></p>
+                <p>¿Olvidaste tu contraseña? <a href="/Src/Login/RestablecerContraseña.php">Restablecer</a></p>
 
             </div>
         </form>
