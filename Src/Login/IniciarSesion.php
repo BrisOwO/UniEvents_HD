@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      <!-- Nombre de la ventana (parte del navegador) -->
     <title>Iniciar Sesión UniEvents+</title>
 
-    <link rel="stylesheet" href="/public/styles/styles.css">
+    <<link rel="stylesheet" href="../../public/styles/styles.css">
 
      <!-- Iconos de las casilas -->  
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -82,8 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
             <!-- Dirigir a RegistrarUsuario.php o RestablecerContraseña.php por medio de los links -->
             <div class="registro-link">
-                <p>¿Aún no tienes cuenta? <a href="RegistrarUsuario.php">Regístrate aquí</a></p>
-                <p>¿Olvidaste tu contraseña? <a href="RestablecerContraseña.php">Restablecer</a></p>
+                <p>¿Aún no tienes cuenta? <a href="../registroUsers/RegistrarUsuario.php">Regístrate aquí</a></p>
+                <p>¿Olvidaste tu contraseña? <a href="../login/RestablecerContraseña.php">Restablecer</a></p>
+
             </div>
         </form>
     </div>
@@ -181,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             let formData = new FormData(this);
             let errorMessage = document.getElementById("error-message");
 
-            fetch("IniciarSesion.php", {
+            fetch("./IniciarSesion.php", {
                 method: "POST",
                 body: formData
             })
