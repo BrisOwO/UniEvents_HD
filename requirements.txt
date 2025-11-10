@@ -1,0 +1,7 @@
+PHP 8.2
+Apache2
+Extensiones PHP:
+- mysqli
+- pdo
+- pdo_mysql
+Base de datos: MySQL 8.0
