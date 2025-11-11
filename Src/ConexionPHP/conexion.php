@@ -1,15 +1,15 @@
 <?php
-$servername = "unievents-db"; // 👈 nombre del contenedor MySQL
+$servername = "unievents-db";  // nombre del contenedor MySQL
 $username = "root";
-$password = "root";           // 👈 misma contraseña que pusiste en docker run -e MYSQL_ROOT_PASSWORD
-$dbname = "unievents";
+$password = "root";
+$database = "unievents";
 
-// Crear conexión
-$mysqli = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $database);
 
-// Verificar conexión
-if ($mysqli->connect_errno) {
-    die("Error de conexión a MySQL (" . $mysqli->connect_errno . "): " . $mysqli->connect_error);
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
+
+echo "Conexión exitosa a la base de datos";
 ?>
 
