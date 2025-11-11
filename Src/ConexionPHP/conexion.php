@@ -1,13 +1,12 @@
 <?php
-$servername = "db";  
+$servername = "unievents-db"; 
 $username = "root";
 $password = "root";
-$dbname = "unievents";
+$database = "unievents";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    die("Conexión fallida: " . $conn->connect_error);
 }
 ?>
-
