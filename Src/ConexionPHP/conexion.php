@@ -1,21 +1,15 @@
 <?php
-header('Content-Type: text/html; charset=utf-8'); // Asegura que el contenido se maneje en UTF-8
+$servername = "unievents-db"; // 👈 nombre del contenedor MySQL
+$username = "root";
+$password = "root";           // 👈 misma contraseña que pusiste en docker run -e MYSQL_ROOT_PASSWORD
+$dbname = "unievents";
 
-$servidor = "localhost";
-$usuario = "root";
-$password = "";
-$base_datos = "unievents";
+// Crear conexión
+$mysqli = new mysqli($servername, $username, $password, $dbname);
 
-// Crear la conexión
-$conn = new mysqli($servidor, $usuario, $password, $base_datos);
-
-// Verificar si la conexión fue exitosa
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-} else {
-    //echo "Conectado exitosamente";  // Opcional, solo para confirmar la conexión
+// Verificar conexión
+if ($mysqli->connect_errno) {
+    die("Error de conexión a MySQL (" . $mysqli->connect_errno . "): " . $mysqli->connect_error);
 }
-
-// Configurar el charset de la conexión para UTF-8
-$conn->set_charset("utf8");
 ?>
+
