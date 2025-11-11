@@ -1,15 +1,13 @@
 <?php
-$servername = "unievents-db";  // nombre del contenedor MySQL
+$servername = "db";  
 $username = "root";
 $password = "root";
-$database = "unievents";
+$dbname = "unievents";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    die("Error de conexión: " . $conn->connect_error);
 }
-
-echo "Conexión exitosa a la base de datos";
 ?>
 
