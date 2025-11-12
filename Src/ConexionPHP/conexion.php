@@ -1,5 +1,5 @@
 <?php
-$servername = "unievents-db"; 
+$servername = "db"; 
 $username = "root";
 $password = "root";
 $database = "unievents";
