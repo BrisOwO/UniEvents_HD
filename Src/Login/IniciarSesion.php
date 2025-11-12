@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
-    $sql = "SELECT * FROM usuarios WHERE num_control = ? AND contraseña = ?";
+    $sql = "SELECT * FROM usuarios WHERE num_control = ? AND `contraseña` = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $num_control, $contraseña);
     $stmt->execute();
