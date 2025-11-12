@@ -1,13 +1,6 @@
 <?php
+require_once '../ConexionPHP/conexion.php';
 session_start();
-
-// Establece la conexión
-$conn = new mysqli('db', 'root', 'root', 'unievents');
-
-// En caso de error en la conexion, muestra mensaje de error
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
 
 // Obtiene los datos
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,15 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-       //Guarda al usuario y lo redirige a su menú (1 Admin, 2 Supervisor y 3 por default alumnos)
+    //Guarda al usuario y lo redirige a su menú (1 Admin, 2 Supervisor y 3 por default alumnos)
     if ($resultado->num_rows > 0) {
         $fila = $resultado->fetch_assoc();
         $_SESSION["usuario"] = $num_control;
         $rol = $fila['rol_usuario'];
 
         echo json_encode(["success" => true, "redirect" => 
-            $rol == 1 ? "MenuAdministrador.php" : 
-            ($rol == 2 ? "MenuSupervisor.php" : "MenuSolicitante.php")]);
+            $rol == 1 ? "../ModuloAdmin/MenuAdmin/MenuAdministrador.php" : 
+            ($rol == 2 ? "../ModuloAdmin/ModuloSupervisor/MenuSupervisor/MenuSupervisor.php" : "../ModuloSolicitante/MenuSolicitante/MenuSolicitante.php")]);
     } else {
         //en caso de tener error en alguna casilla, muestra mensaje de error
         echo json_encode(["success" => false, "message" => "⚠️ Datos incorrectos. Inténtalo de nuevo"]);
@@ -45,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      <!-- Nombre de la ventana (parte del navegador) -->
     <title>Iniciar Sesión UniEvents+</title>
 
-    <<link rel="stylesheet" href="../../public/styles/styles.css">
+    <link rel="stylesheet" href="/public/styles/style.css">
 
      <!-- Iconos de las casilas -->  
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
