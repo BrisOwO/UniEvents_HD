@@ -7,7 +7,7 @@ $num_control = "21051412";
 $contraseña = "BangtanBTS13$$";
 
 // Usar comillas invertidas ` para nombres de columnas con caracteres especiales
-$sql = "SELECT * FROM usuarios WHERE num_control = ? AND `contrasena` = ?";
+$sql = "SELECT * FROM usuarios WHERE num_control = ? AND `contraseña` = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ss", $num_control, $contraseña);
 $stmt->execute();
