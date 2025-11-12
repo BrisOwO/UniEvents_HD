@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- Nombre de la ventana (parte del navegador) -->
     <title>Restablecer</title>
-    <link rel="stylesheet" href="style.css">  
+    <link rel="stylesheet" href="/public/styles/style.css">  
      <!-- Iconos de las casilas -->  
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>

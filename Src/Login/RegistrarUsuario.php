@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <meta charset="UTF-8">
                   <meta name="viewport" content="width=device-width, initial-scale=1">
                   <title>Registro Exitoso</title>
-                  <link rel="stylesheet" href="style.css">
+                  <link rel="stylesheet" href="/public/styles/style.css">
                   <style>
                 .banner {
                       width: 420px;

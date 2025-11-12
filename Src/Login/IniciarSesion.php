@@ -1,5 +1,5 @@
 <?php
-require_once '../ConexionPHP/conexion.php';
+require_once "../ConexionPHP/conexion.php";
 session_start();
 
 // Obtiene los datos
