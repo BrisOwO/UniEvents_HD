@@ -1,9 +1,12 @@
 <?php
-require_once "../ConexionPHP/conexion.php";
+require_once '../ConexionPHP/conexion.php';
 session_start();
 
 // Obtiene los datos
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Asegurarse de que la respuesta sea JSON limpio
+    header('Content-Type: application/json');
+    
     $num_control = $_POST["num_control"]; 
     $contraseña = $_POST["contraseña"];   
 
@@ -20,13 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["usuario"] = $num_control;
         $rol = $fila['rol_usuario'];
 
-        echo json_encode(["success" => true, "redirect" => 
-            $rol == 1 ? "../ModuloAdmin/MenuAdmin/MenuAdministrador.php" : 
-            ($rol == 2 ? "../ModuloAdmin/ModuloSupervisor/MenuSupervisor/MenuSupervisor.php" : "../ModuloSolicitante/MenuSolicitante/MenuSolicitante.php")]);
+        echo json_encode([
+            "success" => true, 
+            "redirect" => $rol == 1 ? "../ModuloAdmin/MenuAdmin/MenuAdministrador.php" : 
+                         ($rol == 2 ? "../ModuloAdmin/ModuloSupervisor/MenuSupervisor/MenuSupervisor.php" : 
+                                     "../ModuloSolicitante/MenuSolicitante/MenuSolicitante.php")
+        ]);
     } else {
         //en caso de tener error en alguna casilla, muestra mensaje de error
-        echo json_encode(["success" => false, "message" => "⚠️ Datos incorrectos. Inténtalo de nuevo"]);
+        echo json_encode([
+            "success" => false, 
+            "message" => "⚠️ Datos incorrectos. Inténtalo de nuevo"
+        ]);
     }
+    
+    $stmt->close();
+    $conexion->close();
     exit();
 }
 ?>
