@@ -1,4 +1,5 @@
 <?php
+require_once '../ConexionPHP/conexion.php';
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
@@ -134,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Nombre de la ventana (parte del navegador) -->
     <title>Registro UniEvents+</title>
-    <link rel="stylesheet" href="../../public/styles/styles.css">
+    <link rel="stylesheet" href="/public/styles/style.css">
     <!-- Iconos de las casillas -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
