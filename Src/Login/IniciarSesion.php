@@ -1,14 +1,21 @@
 <?php
+// Deshabilitar reportes de error en la salida (solo para producción, úsalo temporalmente)
+error_reporting(0);
+ini_set('display_errors', 0);
+
 require_once '../ConexionPHP/conexion.php';
 session_start();
 
 // Obtiene los datos
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Limpiar cualquier salida previa
+    ob_clean();
+    
     // Asegurarse de que la respuesta sea JSON limpio
     header('Content-Type: application/json');
     
-    $num_control = $_POST["num_control"]; 
-    $contraseña = $_POST["contraseña"];   
+    $num_control = trim($_POST["num_control"]); 
+    $contraseña = trim($_POST["contraseña"]);   
 
     // Hace consulta a la base de datos
     $sql = "SELECT * FROM usuarios WHERE num_control = ? AND contraseña = ?";
@@ -42,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 ?>
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -191,7 +198,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                // Verificar si la respuesta es JSON válida
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    return response.json();
+                } else {
+                    return response.text().then(text => {
+                        console.error("Respuesta no JSON:", text);
+                        throw new Error("La respuesta del servidor no es JSON válida");
+                    });
+                }
+            })
             .then(data => {
                 if (data.success) {
                     // Redirecciona a los usuarios si el login es correcto
@@ -204,6 +222,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             })
             .catch(error => {
                 console.error("Error en la petición:", error);
+                errorMessage.textContent = "Error de conexión. Por favor intenta de nuevo.";
+                errorMessage.style.display = "block";
             });
         });
     </script>
