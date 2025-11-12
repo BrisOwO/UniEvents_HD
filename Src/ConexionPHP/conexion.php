@@ -4,9 +4,9 @@ $username = "root";
 $password = "root";
 $database = "unievents";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conexion = new mysqli($servername, $username, $password, $database);
 
-if ($conn->connect_error) {
+if ($conexion->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 ?>
