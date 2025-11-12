@@ -1,52 +1,46 @@
 <?php
-// Deshabilitar reportes de error en la salida (solo para producción, úsalo temporalmente)
-error_reporting(0);
-ini_set('display_errors', 0);
-
 require_once '../ConexionPHP/conexion.php';
 session_start();
 
-// Obtiene los datos
+// Procesar login si es POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Limpiar cualquier salida previa
-    ob_clean();
+    header('Content-Type: application/json; charset=utf-8');
     
-    // Asegurarse de que la respuesta sea JSON limpio
-    header('Content-Type: application/json');
+    $num_control = isset($_POST["num_control"]) ? trim($_POST["num_control"]) : "";
+    $contraseña = isset($_POST["contraseña"]) ? trim($_POST["contraseña"]) : "";
     
-    $num_control = trim($_POST["num_control"]); 
-    $contraseña = trim($_POST["contraseña"]);   
-
-    // Hace consulta a la base de datos
+    if (empty($num_control) || empty($contraseña)) {
+        echo json_encode(["success" => false, "message" => "Completa todos los campos"]);
+        exit;
+    }
+    
     $sql = "SELECT * FROM usuarios WHERE num_control = ? AND contraseña = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $num_control, $contraseña);
     $stmt->execute();
     $resultado = $stmt->get_result();
-
-    //Guarda al usuario y lo redirige a su menú (1 Admin, 2 Supervisor y 3 por default alumnos)
+    
     if ($resultado->num_rows > 0) {
         $fila = $resultado->fetch_assoc();
         $_SESSION["usuario"] = $num_control;
         $rol = $fila['rol_usuario'];
-
-        echo json_encode([
-            "success" => true, 
-            "redirect" => $rol == 1 ? "../ModuloAdmin/MenuAdmin/MenuAdministrador.php" : 
-                         ($rol == 2 ? "../ModuloAdmin/ModuloSupervisor/MenuSupervisor/MenuSupervisor.php" : 
-                                     "../ModuloSolicitante/MenuSolicitante/MenuSolicitante.php")
-        ]);
+        
+        if ($rol == 1) {
+            $redirect = "../ModuloAdmin/MenuAdmin/MenuAdministrador.php";
+        } elseif ($rol == 2) {
+            $redirect = "../ModuloAdmin/ModuloSupervisor/MenuSupervisor/MenuSupervisor.php";
+        } else {
+            $redirect = "../ModuloSolicitante/MenuSolicitante/MenuSolicitante.php";
+        }
+        
+        echo json_encode(["success" => true, "redirect" => $redirect]);
     } else {
-        //en caso de tener error en alguna casilla, muestra mensaje de error
-        echo json_encode([
-            "success" => false, 
-            "message" => "⚠️ Datos incorrectos. Inténtalo de nuevo"
-        ]);
+        echo json_encode(["success" => false, "message" => "⚠️ Datos incorrectos"]);
     }
     
     $stmt->close();
     $conexion->close();
-    exit();
+    exit;
 }
 ?>
 <!DOCTYPE html>
