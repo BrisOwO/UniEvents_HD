@@ -2,7 +2,7 @@
 session_start();
 
 // Establece la conexión
-$conn = new mysqli('localhost', 'root', 'contraseña', 'unievents');
+$conn = new mysqli('db', 'root', 'root', 'unievents');
 
 // En caso de error en la conexion, muestra mensaje de error
 if ($conexion->connect_error) {
