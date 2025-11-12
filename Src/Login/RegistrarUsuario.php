@@ -3,14 +3,6 @@ require_once '../ConexionPHP/conexion.php';
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-// Establece la conexión
-$conexion = new mysqli("localhost", "root", "", "unievents");
-
-// En caso de error en la conexion, muestra mensaje de error
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
-
 $error = ""; // Variable para guardar errores
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
